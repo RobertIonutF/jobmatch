@@ -1,3 +1,4 @@
+// src/app/joburi/page.tsx
 import { Suspense } from 'react';
 import { JobList } from './components/job-list';
 import { JobFilters } from './components/job-filters';
@@ -20,7 +21,7 @@ async function getJobs(page: number = 1, limit: number = 10) {
     return jobs;
   } catch (error) {
     console.error('Failed to fetch jobs:', error);
-    throw new Error('Failed to fetch jobs');
+    return [];
   }
 }
 

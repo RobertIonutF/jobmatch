@@ -1,3 +1,4 @@
+// src/app/joburi/components/job-list.tsx
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
@@ -7,8 +8,12 @@ import { Button } from '@/components/ui/button';
 import { JobPosting } from '@prisma/client';
 import { useToast } from '@/components/ui/use-toast';
 
-export function JobList() {
-  const [jobs, setJobs] = useState<JobPosting[]>([]);
+interface JobListProps {
+  initialJobs: JobPosting[];
+}
+
+export function JobList({ initialJobs }: JobListProps) {
+  const [jobs, setJobs] = useState<JobPosting[]>(initialJobs);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
@@ -44,11 +49,16 @@ export function JobList() {
   }, [searchParams, toast]);
 
   useEffect(() => {
-    setJobs([]);
+    if (initialJobs.length === 0) {
+      fetchJobs(1);
+    }
+  }, [fetchJobs, initialJobs]);
+
+  useEffect(() => {
+    setJobs(initialJobs);
     setPage(1);
     setHasMore(true);
-    fetchJobs(1);
-  }, [searchParams, fetchJobs]);
+  }, [searchParams, initialJobs]);
 
   const loadMoreJobs = () => {
     fetchJobs(page + 1);
