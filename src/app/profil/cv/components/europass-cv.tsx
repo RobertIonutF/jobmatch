@@ -40,7 +40,7 @@ export function EuropassCV({ user }: EuropassCVProps) {
           {user.experiences.map((exp) => (
             <div key={exp.id} className="mb-4">
               <h3 className="text-xl font-medium">{exp.jobTitle}</h3>
-              <p>{exp.company} - {exp.location}</p>
+              <p>{exp.company}</p>
               <p>{new Date(exp.startDate).toLocaleDateString('ro-RO')} - {exp.endDate ? new Date(exp.endDate).toLocaleDateString('ro-RO') : 'Prezent'}</p>
               <p>{exp.description}</p>
             </div>
