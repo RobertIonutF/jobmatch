@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { JobCard } from './job-card';
 import { Button } from '@/components/ui/button';
@@ -15,7 +15,7 @@ export function JobList() {
   const searchParams = useSearchParams();
   const { toast } = useToast();
 
-  const fetchJobs = async (pageNum: number) => {
+  const fetchJobs = useCallback(async (pageNum: number) => {
     setIsLoading(true);
     const params = new URLSearchParams(searchParams.toString());
     params.set('page', pageNum.toString());
@@ -41,14 +41,14 @@ export function JobList() {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [searchParams, toast]);
 
   useEffect(() => {
     setJobs([]);
     setPage(1);
     setHasMore(true);
     fetchJobs(1);
-  }, [searchParams]);
+  }, [searchParams, fetchJobs]);
 
   const loadMoreJobs = () => {
     fetchJobs(page + 1);
