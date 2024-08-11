@@ -1,113 +1,242 @@
-import Image from "next/image";
+// src/app/page.tsx
+import Image from 'next/image'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { CheckCircle, Briefcase, TrendingUp, Users, Building, Code, Stethoscope, GraduationCap } from 'lucide-react'
+import heroImage from '@images/hero.png';
 
-export default function Home() {
+const features = [
+  { 
+    title: 'Potrivire AI',
+    description: 'Algoritmul nostru avansat de AI analizează profilul tău și te conectează cu joburile potrivite.',
+    icon: <CheckCircle className="h-6 w-6" />
+  },
+  { 
+    title: 'Optimizare CV',
+    description: 'Primește sugestii personalizate pentru a-ți îmbunătăți CV-ul și a-ți crește șansele de angajare.',
+    icon: <TrendingUp className="h-6 w-6" />
+  },
+  { 
+    title: 'Recomandări de joburi',
+    description: 'Descoperă oportunități de carieră adaptate perfect profilului și aspirațiilor tale.',
+    icon: <Briefcase className="h-6 w-6" />
+  },
+  { 
+    title: 'Recrutare de talente',
+    description: 'Angajatorii pot găsi rapid candidații ideali folosind tehnologia noastră de potrivire.',
+    icon: <Users className="h-6 w-6" />
+  }
+]
+
+const jobCategories = [
+  { name: 'IT & Dezvoltare', icon: <Code className="h-6 w-6" /> },
+  { name: 'Finanțe & Contabilitate', icon: <Building className="h-6 w-6" /> },
+  { name: 'Sănătate & Medicină', icon: <Stethoscope className="h-6 w-6" /> },
+  { name: 'Educație & Training', icon: <GraduationCap className="h-6 w-6" /> },
+]
+
+const testimonials = [
+  {
+    name: 'Ana Popescu',
+    position: 'Developer Full Stack',
+    company: 'TechRO',
+    quote: 'Datorită JobMatch, mi-am găsit jobul de vis în doar două săptămâni!',
+    image: '/ana-popescu.jpg'
+  },
+  {
+    name: 'Mihai Ionescu',
+    position: 'Manager HR',
+    company: 'FinanceExpert',
+    quote: 'JobMatch ne-a ajutat să găsim candidați excelenți pentru pozițiile dificil de ocupat.',
+    image: '/mihai-ionescu.jpg'
+  }
+]
+
+const recentJobs = [
+  { title: 'Senior Java Developer', company: 'SoftVision', location: 'Cluj-Napoca' },
+  { title: 'Marketing Manager', company: 'AdRo', location: 'București' },
+  { title: 'Data Analyst', company: 'DataInsights', location: 'Timișoara' }
+]
+
+const blogPosts = [
+  { title: '5 Sfaturi pentru un CV de succes', image: '/cv-tips.jpg' },
+  { title: 'Cum să te pregătești pentru un interviu online', image: '/online-interview.jpg' },
+  { title: 'Tendințe în piața muncii pentru 2024', image: '/job-market-trends.jpg' }
+]
+
+export default function LandingPage() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">src/app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:size-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    <div className="flex flex-col items-center">
+      {/* Hero Section */}
+      <section className="text-center py-20">
+        <h1 className="text-4xl font-bold mb-4">Găsește jobul perfect cu inteligența artificială</h1>
+        <p className="text-xl mb-8">JobMatch conectează candidații și angajatorii folosind tehnologie AI avansată</p>
+        <div className="flex justify-center gap-4">
+          <Button size="lg">Caută joburi</Button>
+          <Button size="lg" variant="outline">Pentru angajatori</Button>
         </div>
-      </div>
+        <div className="mt-12">
+          <Image src={heroImage} alt="JobMatch AI" width={600} height={400} />
+        </div>
+      </section>
 
-      <div className="relative z-[-1] flex place-items-center before:absolute before:h-[300px] before:w-full before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 sm:before:w-[480px] sm:after:w-[240px] before:lg:h-[360px]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
+      {/* Key Features Section */}
+      <section className="py-20 bg-muted w-full">
+        <div className="container mx-auto">
+          <h2 className="text-3xl font-bold text-center mb-12">Caracteristici cheie</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {features.map((feature, index) => (
+              <Card key={index}>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    {feature.icon}
+                    {feature.title}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <CardDescription>{feature.description}</CardDescription>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
 
-      <div className="mb-32 grid text-center lg:mb-0 lg:w-full lg:max-w-5xl lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Docs{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
+      {/* How It Works Section */}
+      <section className="py-20">
+        <div className="container mx-auto">
+          <h2 className="text-3xl font-bold text-center mb-12">Cum funcționează</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="text-center">
+              <div className="bg-primary text-primary-foreground rounded-full w-12 h-12 flex items-center justify-center mx-auto mb-4">1</div>
+              <h3 className="font-bold mb-2">Creează-ți profilul</h3>
+              <p>Completează-ți CV-ul și preferințele de carieră</p>
+            </div>
+            <div className="text-center">
+              <div className="bg-primary text-primary-foreground rounded-full w-12 h-12 flex items-center justify-center mx-auto mb-4">2</div>
+              <h3 className="font-bold mb-2">Primește potriviri</h3>
+              <p>AI-ul nostru îți găsește cele mai bune oportunități</p>
+            </div>
+            <div className="text-center">
+              <div className="bg-primary text-primary-foreground rounded-full w-12 h-12 flex items-center justify-center mx-auto mb-4">3</div>
+              <h3 className="font-bold mb-2">Aplică și conectează-te</h3>
+              <p>Aplică la joburile potrivite și începe o nouă carieră</p>
+            </div>
+          </div>
+        </div>
+      </section>
 
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Learn{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
+      {/* Success Stories Section */}
+      <section className="py-20 bg-muted w-full">
+        <div className="container mx-auto">
+          <h2 className="text-3xl font-bold text-center mb-12">Povești de succes</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {testimonials.map((testimonial, index) => (
+              <Card key={index}>
+                <CardContent className="flex items-center p-6">
+                  <Image src={testimonial.image} alt={testimonial.name} width={80} height={80} className="rounded-full mr-4" />
+                  <div>
+                    <p className="italic mb-2">"{testimonial.quote}"</p>
+                    <p className="font-bold">{testimonial.name}</p>
+                    <p>{testimonial.position} la {testimonial.company}</p>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
 
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Templates{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Explore starter templates for Next.js.
-          </p>
-        </a>
+      {/* Job Categories Section */}
+      <section className="py-20">
+        <div className="container mx-auto">
+          <h2 className="text-3xl font-bold text-center mb-12">Categorii de joburi populare</h2>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {jobCategories.map((category, index) => (
+              <Card key={index} className="text-center hover:bg-muted cursor-pointer transition-colors">
+                <CardContent className="p-6">
+                  {category.icon}
+                  <h3 className="font-bold mt-2">{category.name}</h3>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
 
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Deploy{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-balance text-sm opacity-50">
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  );
+      {/* Stats Section */}
+      <section className="py-20 bg-primary text-primary-foreground">
+        <div className="container mx-auto text-center">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div>
+              <h3 className="text-4xl font-bold">10,000+</h3>
+              <p>Joburi potrivite</p>
+            </div>
+            <div>
+              <h3 className="text-4xl font-bold">95%</h3>
+              <p>Rată de satisfacție</p>
+            </div>
+            <div>
+              <h3 className="text-4xl font-bold">1000+</h3>
+              <p>Companii partenere</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* For Employers Section */}
+      <section className="py-20">
+        <div className="container mx-auto text-center">
+          <h2 className="text-3xl font-bold mb-4">Pentru angajatori</h2>
+          <p className="mb-8">Descoperiți cum JobMatch poate îmbunătăți procesul dvs. de recrutare și vă poate ajuta să găsiți candidații ideali.</p>
+          <Button size="lg">Programează o demonstrație</Button>
+        </div>
+      </section>
+
+      {/* Latest Job Openings Section */}
+      <section className="py-20 bg-muted w-full">
+        <div className="container mx-auto">
+          <h2 className="text-3xl font-bold text-center mb-12">Cele mai recente joburi</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {recentJobs.map((job, index) => (
+              <Card key={index}>
+                <CardHeader>
+                  <CardTitle>{job.title}</CardTitle>
+                  <CardDescription>{job.company}</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <p>{job.location}</p>
+                  <Button className="mt-4" variant="outline">Vezi detalii</Button>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+          <div className="text-center mt-8">
+            <Button variant="outline">Vezi toate joburile</Button>
+          </div>
+        </div>
+      </section>
+
+      {/* Blog or Resources Section */}
+      <section className="py-20">
+        <div className="container mx-auto">
+          <h2 className="text-3xl font-bold text-center mb-12">Resurse pentru carieră</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {blogPosts.map((post, index) => (
+              <Card key={index}>
+                <Image src={post.image} alt={post.title} width={400} height={200} className="w-full h-48 object-cover" />
+                <CardContent className="p-4">
+                  <h3 className="font-bold mb-2">{post.title}</h3>
+                  <Button variant="link">Citește articolul</Button>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+          <div className="text-center mt-8">
+            <Button variant="outline">Explorează toate resursele</Button>
+          </div>
+        </div>
+      </section>
+    </div>
+  )
 }
